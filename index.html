@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intractive World</title>
+    <meta name="description" content="Cursor Handler - A-Frame School" />
+
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.x/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/akbartus/A-Frame-Component-Postprocessing/dist/post-processing.min.js"></script>
+    <script src="./components/hdr-light.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: true"
+      cursor="rayOrigin: mouse; fuse: false"
+      raycaster="objects: .clickable;"
+      hdri
+      shadow="type: pcfsoft"
+      renderer="
+    antialias: true;
+    colorManagement: true;
+    physicallyCorrectLights: true;
+    "
+      fog="color: #ffffff; far: 44; density: 0; type: exponential"
+    >
+      <a-camera
+        camera="near: 0.099;"
+        position="13.487 1.6 8.941"
+        rotation="0 -180 0"
+        lock-controls
+      >
+        <a-cursor color="#FAFAFA"></a-cursor>
+      </a-camera>
+
+      <a-assets>
+        <a-asset-item
+          id="castle"
+          src="./assets/models/Castle.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="watchTower"
+          src="./assets/models/watch-tower.glb"
+        ></a-asset-item>
+        <a-asset-item id="robot" src="./assets/models/robot.glb"></a-asset-item>
+        <a-asset-item id="ground" src="./assets/models/Yard.glb"></a-asset-item>
+        <a-asset-item id="rubic" src="./assets/rubic.ttf"></a-asset-item>
+        <a-asset-item
+          id="soilder"
+          src="./assets/models/soilder.glb"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-gltf-model
+        src="#castle"
+        scale="8 8 8"
+        position="0 0 -10"
+      ></a-gltf-model>
+
+      <a-troika-text
+        value="Welcome To Art Gallery"
+        material="shader: standard; metalness: 0.8;"
+        position="-21.59 18.1 8.32"
+        rotation="3 90 0"
+        scale="10 10 10 "
+        color="red"
+        font="#rubic"
+        fill-opacity="5"
+        outline-blur="0.5"
+        outline-color="#000000"
+      ></a-troika-text>
+
+      <a-troika-text
+        value="Enter"
+        material="shader: standard; metalness: 0.8;"
+        position="0 6 -3"
+        rotation="0 4 0"
+        scale="5 5 5"
+        color="red"
+        font="#rubic"
+        fill-opacity="5"
+        outline-blur="0.1"
+      ></a-troika-text>
+
+      <a-gltf-model
+        id="tower"
+        src="#watchTower"
+        scale="8 8 8"
+        position="-20 0 8.5"
+        rotation="0 93 0"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        id="soilder"
+        src="#soilder"
+        scale="0.01 0.01 0.01"
+        position="-14 0 10.3"
+        rotation="0 103 0"
+        animation-mixer
+      ></a-gltf-model>
+
+      <a-entity
+        class="clickable"
+        cursor-listener
+        id="robot"
+        gltf-model="#robot"
+        position="0 0 -14"
+        rotation="0 0 0"
+        scale="1.5 1.5 1.5"
+        animation-mixer
+      ></a-entity>
+
+      <a-troika-text
+        value="VIEW MY PROJECTS"
+        material="metalness: 0.8"
+        position="0 3.44991 -12.29793"
+        rotation=""
+        scale="4 4 4"
+        color="#6b0062"
+        font="#rubic"
+        fill-opacity="3"
+        outline-blur="0.1"
+        outline-color="#ffffff"
+        troika-text="value: Click me; color: #627eb7"
+      ></a-troika-text>
+
+      <!-- ENVIRONMENT -->
+      <a-light
+        type="point"
+        color="#ff6600"
+        position="-18.45 8.59 8.405"
+        intensity="30"
+      ></a-light>
+      <a-entity
+        light="color: #ff6600; intensity: 3;"
+        position="32.4 20.3 59.7"
+        rotation="-18.2 29 0"
+        scale="2.6 2 1"
+      ></a-entity>
+
+      <a-entity
+        id="base"
+        gltf-model="#ground"
+        position="-17.8 10.37 52"
+        scale="300 300 300"
+      ></a-entity>
+      <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
+
+      <a-entity environment="preset:starry" position="0 -5 0"></a-entity>
+    </a-scene>
+  </body>
+</html>
